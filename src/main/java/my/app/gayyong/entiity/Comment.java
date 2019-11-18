@@ -10,6 +10,7 @@ public class Comment {
     @GeneratedValue
     private Integer commentId;
 
+    @Column(nullable = false)
     private String comText;
 
     @ManyToOne

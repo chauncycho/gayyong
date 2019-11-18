@@ -80,7 +80,7 @@ public class ArticleController {
         article.setLasttime(new Date());
         log.info("修改文章");
         try {
-            if (article != null && article.getArtId() != null && !article.getArtId().equals("")){
+            if (article != null && article.getArtId() != null){
                 Optional<Article> findArticleResult = articleRepository.findById(article.getArtId());
                 if (findArticleResult.isPresent()){
                     Article articleResult = findArticleResult.get();

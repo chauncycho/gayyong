@@ -524,3 +524,182 @@
     "data": null
 }
 ```
+
+---
+
+### 3 Comment
+
+---
+#### 3.1 添加评论
+
+##### 3.1.1 接口说明
+
+|url|/comment/add|
+|---|---|
+|请求方式|POST|
+|Content-Type|x-www-form-urlencoded|
+
+##### 3.1.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|commentId|否|评论id|
+|comText|是|评论内容|
+|userId|是|用户id|
+|artId|是|文章id|
+
+##### 3.1.3 返回样例
+```json
+{
+    "status": 200,
+    "msg": "添加评论成功",
+    "data": {
+        "commentId": 6,
+        "comText": "评论测试",
+        "user": {
+            "userId": "123456",
+            "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+            "sex": "男",
+            "nickname": "ovo",
+            "headUrl": "testtesttest"
+        },
+        "article": {
+            "artId": 5,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 20:15:09",
+            "artTag": "hahaha"
+        }
+    }
+}
+```
+
+#### 3.2 查询评论
+
+##### 3.2.1 接口说明
+
+|url|/comment/get|
+|---|---|
+|请求方式|GET|
+
+##### 3.2.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|commentId|是|评论id|
+
+##### 3.2.3 返回样例
+
+###### 成功
+
+```json
+{
+    "status": 200,
+    "msg": "查询评论成功",
+    "data": {
+        "commentId": 6,
+        "comText": "评论测试",
+        "user": {
+            "userId": "123456",
+            "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+            "sex": "男",
+            "nickname": "ovo",
+            "headUrl": "testtesttest"
+        },
+        "article": {
+            "artId": 5,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 20:15:09",
+            "artTag": "hahaha"
+        }
+    }
+}
+```
+
+###### 失败
+
+```json
+{
+    "status": 200,
+    "msg": "未找到评论",
+    "data": null
+}
+```
+
+#### 3.3 修改评论
+
+##### 3.3.1 接口说明
+
+|url|/comment/update|
+|---|---|
+|请求方式|POST|
+|Content-Type|x-www-form-urlencoded|
+
+##### 3.3.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|commentId|是|评论id|
+|comText|否|评论内容内容|
+
+##### 3.3.3 返回样例
+```json
+{
+    "status": 200,
+    "msg": "修改评论成功",
+    "data": {
+        "commentId": 6,
+        "comText": "modified",
+        "user": {
+            "userId": "123456",
+            "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+            "sex": "男",
+            "nickname": "ovo",
+            "headUrl": "testtesttest"
+        },
+        "article": {
+            "artId": 5,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 20:15:09",
+            "artTag": "hahaha"
+        }
+    }
+}
+```
+
+#### 3.4 删除文章
+
+##### 3.4.1 接口说明
+
+|url|/comment/delete|
+|---|---|
+|请求方式|GET|
+
+##### 3.4.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|commentId|是|评论id|
+
+##### 3.4.3 返回样例
+
+###### 成功
+
+```json
+{
+    "status": 200,
+    "msg": "删除成功",
+    "data": null
+}
+```
+
+###### 失败
+```json
+{
+    "status": 200,
+    "msg": "评论不存在",
+    "data": null
+}
+```
