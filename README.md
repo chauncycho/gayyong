@@ -339,7 +339,7 @@
 |---|---|---|
 |artId|是|文章id|
 
-##### 2.1.3 返回样例
+##### 2.2.3 返回样例
 
 ###### 成功
 
@@ -522,6 +522,115 @@
     "status": 500,
     "msg": "userId未找到用户",
     "data": null
+}
+```
+
+#### 2.7 查询文章列表
+
+##### 2.7.1 接口说明
+
+|url|/article/list|
+|---|---|
+|请求方式|GET|
+
+##### 2.7.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|order|否|排序方式，逆序为"desc"，顺序为"asc"，默认为顺序|
+|property|否|根据属性排序，可选["artId","title","artText","lasttime","artTag"],默认为"artId"|
+
+##### 2.7.3 返回样例
+
+###### 成功
+
+```json
+{
+    "status": 200,
+    "msg": "获取文章列表成功",
+    "data": [
+        {
+            "artId": 5,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 20:15:09",
+            "artTag": "hahaha",
+            "collectNum": [],
+            "user": {
+                "userId": "12345",
+                "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+                "sex": "女",
+                "nickname": "ovo",
+                "headUrl": "testtesttest"
+            },
+            "comments": [
+                {
+                    "commentId": 6,
+                    "comText": "modified"
+                },
+                {
+                    "commentId": 8,
+                    "comText": "评论测试"
+                }
+            ]
+        },
+        {
+            "artId": 4,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 19:24:51",
+            "artTag": "hahaha",
+            "collectNum": [],
+            "user": {
+                "userId": "12345",
+                "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+                "sex": "女",
+                "nickname": "ovo",
+                "headUrl": "testtesttest"
+            },
+            "comments": []
+        },
+        {
+            "artId": 2,
+            "title": "test2qwq",
+            "artText": "bilibilibilibilibilibili",
+            "lasttime": "2019-11-17 18:39:45",
+            "artTag": "hahaha",
+            "collectNum": [
+                {
+                    "userId": "12345",
+                    "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+                    "sex": "女",
+                    "nickname": "ovo",
+                    "headUrl": "testtesttest"
+                }
+            ],
+            "user": {
+                "userId": "12345",
+                "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+                "sex": "女",
+                "nickname": "ovo",
+                "headUrl": "testtesttest"
+            },
+            "comments": []
+        },
+        {
+            "artId": 1,
+            "title": "test",
+            "artText": "iboigwegoi",
+            "lasttime": "2019-11-17 18:35:29",
+            "artTag": "qoq",
+            "collectNum": [],
+            "user": {
+                "userId": "123456",
+                "pwd": "7ac66c0f148de9519b8bd264312c4d64",
+                "sex": "男",
+                "nickname": "ovo",
+                "headUrl": "testtesttest"
+            },
+            "comments": []
+        }
+    ]
 }
 ```
 

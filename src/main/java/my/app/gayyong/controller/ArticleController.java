@@ -9,12 +9,14 @@ import my.app.gayyong.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -213,5 +215,25 @@ public class ArticleController {
             log.info("参数userId或artId未找到");
             return JsonResult.error500("参数userId或artId未找到");
         }
+    }
+
+    @GetMapping(path = "/article/list")
+    public JsonResult getArticleList(String order, String property){
+        Sort.Order orderType;
+        if (property == null || property.equals("")){
+            property = "artId";
+        }
+        if (order != null && !order.equals("")){
+            if (order.equals("asc")){
+                orderType = new Sort.Order(Sort.Direction.ASC,property);
+            }else{
+                orderType = new Sort.Order(Sort.Direction.DESC,property);
+            }
+        }else{
+            orderType = new Sort.Order(Sort.Direction.ASC,property);
+        }
+        Sort sort = new Sort(orderType);
+        List<Article> articles = articleRepository.findAll(sort);
+        return JsonResult.ok("获取文章列表成功",articles);
     }
 }
