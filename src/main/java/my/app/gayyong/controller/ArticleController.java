@@ -1,5 +1,6 @@
 package my.app.gayyong.controller;
 
+import com.oracle.tools.packager.Log;
 import my.app.gayyong.entiity.Article;
 import my.app.gayyong.entiity.JsonResult;
 import my.app.gayyong.entiity.User;
@@ -219,6 +220,7 @@ public class ArticleController {
 
     @GetMapping(path = "/article/list")
     public JsonResult getArticleList(String order, String property){
+        log.info("查询文章列表");
         Sort.Order orderType;
         if (property == null || property.equals("")){
             property = "artId";
@@ -230,8 +232,10 @@ public class ArticleController {
                 orderType = new Sort.Order(Sort.Direction.DESC,property);
             }
         }else{
+            order = "asc";
             orderType = new Sort.Order(Sort.Direction.ASC,property);
         }
+        log.info("根据属性:"+property+" 排序:"+order+" 进行排序");
         Sort sort = new Sort(orderType);
         List<Article> articles = articleRepository.findAll(sort);
         return JsonResult.ok("获取文章列表成功",articles);

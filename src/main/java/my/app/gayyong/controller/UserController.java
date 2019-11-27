@@ -1,5 +1,6 @@
 package my.app.gayyong.controller;
 
+import com.oracle.tools.packager.Log;
 import my.app.gayyong.entiity.JsonResult;
 import my.app.gayyong.entiity.User;
 import my.app.gayyong.repository.UserRepository;
@@ -7,11 +8,10 @@ import my.app.gayyong.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -183,7 +183,7 @@ public class UserController  {
         }
     }
 
-    @GetMapping("/user/unfollow")
+    @GetMapping(path = "/user/unfollow")
     public JsonResult unfollow(String userId, String targetId){
         log.info("取消关注");
         if (userId != null && targetId != null && !userId.equals("") && !targetId.equals("")) {
@@ -234,6 +234,35 @@ public class UserController  {
             }
         }else{
             return JsonResult.error500("userId或targetId参数未找到");
+        }
+    }
+
+    @GetMapping(path="/user/login")
+    public JsonResult loginCheck(String userId, String pwd){
+        log.info("用户登录");
+        if (userId != null && !userId.equals("")){
+            Optional<User> findUserResult = userRepository.findById(userId);
+            if (findUserResult.isPresent()){
+                User user = findUserResult.get();
+                if (pwd != null && !pwd.equals("")) {
+                    if (DigestUtils.md5DigestAsHex(pwd.getBytes()).equals(user.getPwd())) {
+                        log.info("登录成功:"+user);
+                        return JsonResult.ok("登录成功", user);
+                    } else {
+                        log.info("userId:"+userId+" pwd:"+pwd+" 登录失败");
+                        return JsonResult.ok("登录失败");
+                    }
+                }else{
+                    log.error("缺少参数pwd");
+                    return JsonResult.error500("缺少参数pwd");
+                }
+            }else{
+                log.error("userId:"+userId+" 不存在");
+                return JsonResult.error500("userId不存在");
+            }
+        }else{
+            log.error("缺少参数userId");
+            return JsonResult.error500("缺少参数userId");
         }
     }
 }
