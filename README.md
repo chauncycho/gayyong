@@ -276,6 +276,53 @@
 }
 ```
 
+#### 1.7 用户登录
+
+##### 1.7.1 接口说明
+
+|url|/user/login|
+|---|---|
+|请求方式|GET|
+
+##### 1.7.2 请求参数
+
+|参数名词|是否必须|描述|
+|---|---|---|
+|userId|是|用户id|
+|pwd|是|密码|
+
+##### 1.7.3 返回样例
+
+###### 成功
+
+```json
+{
+    "status": 200,
+    "msg": "登录成功",
+    "data": {
+        "userId": "123456",
+        "pwd": "e10adc3949ba59abbe56e057f20f883e",
+        "sex": "男",
+        "nickname": "TEST",
+        "headUrl": null,
+        "collectionArticleList": [],
+        "articleList": [],
+        "follow": [],
+        "follower": []
+    }
+}
+```
+
+###### 失败
+
+```json
+{
+    "status": 200,
+    "msg": "登录失败",
+    "data": null
+}
+```
+
 ---
 
 ### 2 Article
